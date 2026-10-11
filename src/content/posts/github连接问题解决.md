@@ -31,7 +31,13 @@ github连接问题大体得到解决。
 可能的解决方案：
 
 ```
-命令easy-keepalive-github run 或 schtasks /Run /TN GitHubKeepAlive手动触发一次任务让它立刻重新检测
+手动触发一次任务让它立刻重新检测
+
+# 手动触发一次，然后查看日志
+schtasks /Run /TN GitHubKeepAlive
+Start-Sleep 30   # 最坏情况 7 个候选 × 6 秒超时
+Get-Content C:\ProgramData\GitHubKeepalive\logs\keepalive.log -Encoding UTF8
+
 -正卡在“显示 OK”那种异常状态，手动触发大概率会换到一个新 IP，从而恢复正常：当你手动触发时，工具会重新执行完整检测流程。旧 IP 虽然之前返回过 200，但如果此刻它的 TLS 握手或 200 响应不稳定或超时（“假活”状态本身就是不稳定的），就会被判定为不可用，工具随即从候选池中选一个新 IP 切换过去。
 ```
 
