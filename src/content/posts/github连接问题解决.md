@@ -18,6 +18,32 @@ github连接问题大体得到解决。
 
 
 
+**日志清理**
+
+```
+第一步：创建一个清理脚本
+
+在任意位置（比如 C:\Scripts\）新建一个文本文件，命名为 clear-github-log.bat，内容就一行：
+
+@echo off
+powershell.exe -NoProfile -Command "Clear-Content -Path 'C:\ProgramData\GitHubKeepalive\logs\keepalive.log' -Force"
+
+第二步：创建计划任务指向这个脚本
+
+在管理员 PowerShell 或 CMD 里执行（路径按你实际放的位置改）：
+
+schtasks /create /tn "GitHubKeepalive日志清理" /tr "C:\Scripts\clear-github-log.bat" /sc weekly /d SUN /st 03:00 /ru SYSTEM /f
+
+#说明：
+/tn：任务名称
+/tr：执行的 PowerShell 命令（清空日志）
+/sc weekly /d SUN /st 03:00：每周日凌晨 3 点执行
+/ru SYSTEM：以 SYSTEM 权限运行，无需输入密码
+/f：覆盖同名任务而不提示
+```
+
+
+
 经个人测试发现以下新问题：
 
 1.连接github成功但github网页只显示文本"OK"（目前较少见）
