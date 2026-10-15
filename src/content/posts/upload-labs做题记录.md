@@ -540,7 +540,7 @@ Off	 仍然解析	     不解析，当普通文本输出
 
 ![image-20261008140958494](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/08/50149c212cf365fb7e33b19822560b85-image-20261008140958494.png)
 
-想解决的话：在 `<?php` 前留一个换行。
+想解决的话：在 原.php文件里`<?php` 前留一个换行。
 
 蚁剑测试连接的时候url要写文件包含漏洞页面的url，不然连不到。
 
@@ -583,3 +583,69 @@ Off	 仍然解析	     不解析，当普通文本输出
 ![image-20261008143854804](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/08/ab61b6b87eacce64829c5540728ccf78-image-20261008143854804.png)
 
 然后测试成功，不多写了。
+
+
+
+**Pass16**
+
+依照pass14,pass15方法尝试，行不通。
+
+用notepad打开上传后的图片马，发现找不到关键字“php”.
+
+![image-20261015141914956](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/15/455122648027f4867ed005871468e155-image-20261015141914956.png)
+
+查看提示，发现对上传图片进行了二次渲染。
+
+![屏幕截图 2026-10-15 141734](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/15/5e2b76a106d32240fd6018c03935cd53-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-10-15%20141734.png)
+
+以”.gif“为例，使用工具010Editor对原图片和上传图片进行比较。
+
+（工具->比较文件）
+
+![image-20261015142254000](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/15/78363bd2bce1ceab5973eed768fc5f68-image-20261015142254000.png)
+
+（渲染后图片）灰色区域内，点击键盘上的“insert”(插入)，将模式转换为插入模式。
+
+![image-20261015142430410](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/15/cdb9fa0ea8884713bb4b86241e40095d-image-20261015142430410.png)
+
+（渲染后图片）文本框内插入一句话木马，保存。
+
+![image-20261015142550400](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/15/19bb1a77f003bddf607bf9eccaa98a75-image-20261015142550400.png)
+
+成功。
+
+![image-20261015142720761](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/15/a2abaf6934f60df84f63e64ff9af83f5-image-20261015142720761.png)
+
+
+
+```
+关于010Editor文件比较功能的颜色说明：
+1. 红色：被删除或修改的字节。
+在上方（或基准）文件中存在，但在下方（或目标）文件中被删除或发生改变的字节。这通常是写入木马代码后，被服务器二次渲染（如 GD 库）破坏或覆盖的区域。
+2. 绿色：新增的字节。
+在下方（或目标）文件中新增，但在上方（或基准）文件中不存在的字节。
+3. 灰色：完全相同的字节。
+两个文件中完全一致、没有任何变化的区域。
+4. 蓝色：被移动或发生偏移的字节。
+这通常表示字节的内容没有改变，但其在文件中的位置（偏移量）发生了改变。在图片二次渲染中，如果服务器重新压缩了图像数据，导致后面的数据整体向前或向后移动，这些字节就会显示为蓝色。
+```
+
+```
+关于二次渲染的拓展：
+
+q1:找一段几百个字节的、绝对不可能碰巧一样的长数据（比如一段复杂的像素特征）。在渲染后的图里找到这段长数据，确认它是灰色的（没变），然后跑去原始图片里，用 Ctrl+F 搜索这几百个字节，找到之后，在它后面插入木马。行不行？
+a1:不行。“灰色”只代表字面内容相同，不代表文件结构相同！
+强调：尽量不要用"灰色"当插入位置的依据，灰色只证明字节相同，不证明结构身份相同。
+
+q2：渲染后的图片再次上传会不会重新渲染？
+a2：会。流程是：
+1.上传原图，下载渲染图。
+2.在渲染图的安全区插入代码。
+3.再次上传这张带代码的渲染图。
+4.服务器再次渲染，但因为代码在灰色”安全区“，可能被完美保留。
+```
+
+a1失败情况：
+
+![image-20261015153533058](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/15/156617cbbe884ff12cebb1bee0e90392-image-20261015153533058.png)
+
