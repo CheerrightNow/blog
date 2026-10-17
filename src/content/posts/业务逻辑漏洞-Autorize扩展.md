@@ -6,10 +6,10 @@ tags:
 - Web
   - 业务逻辑漏洞
 - burpsuite
-  - Autorize扩展
+  - Autorize扩展 
 ---
 
-业务逻辑漏洞 Autorize扩展的使用
+**Autorize扩展的使用**
 
 **一、下载扩展**
 
