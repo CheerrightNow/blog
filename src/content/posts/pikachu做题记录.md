@@ -1,6 +1,6 @@
 ---
-title: pikachu
-description: pikachu做题记录
+title: pikachu做题记录
+description: (kali-ip:8090进入)
 published: 2026-10-16
 tags:
 - Web
