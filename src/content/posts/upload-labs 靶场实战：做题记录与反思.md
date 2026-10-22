@@ -1,11 +1,9 @@
 ---
-title: upload-labs做题记录
-description: upload-labs个人做题全过程
+title: upload-labs 靶场实战：做题记录与反思
+category: Web-靶场实战
+description: 完整记录 upload-labs 靶场个人做题过程，涵盖各关卡的文件上传漏洞利用与绕过手法，总结实战经验。
 published: 2026-09-22
-tags:
-- Web
-  - 文件上传漏洞
-    - 靶场实战
+tags: [Web, upload-labs, 靶场实战]
 ---
 
 **upload-labs靶场通关**

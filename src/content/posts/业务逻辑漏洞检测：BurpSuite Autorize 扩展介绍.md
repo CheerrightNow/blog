@@ -1,12 +1,9 @@
 ---
-title: 业务逻辑漏洞-Autorize扩展
-description: burpsuite-Autorize扩展介绍
+title: 业务逻辑漏洞检测：BurpSuite Autorize 扩展介绍
+category: Web 安全
+description: 介绍 BurpSuite 的 Autorize 扩展，说明其在业务逻辑漏洞（尤其是越权访问）检测中的配置方式与使用思路。
 published: 2026-10-17
-tags:
-- Web
-  - 业务逻辑漏洞
-- burpsuite
-  - Autorize扩展 
+tags: [Web, 业务逻辑漏洞, BurpSuite, Autorize]
 ---
 
 **Autorize扩展的使用**

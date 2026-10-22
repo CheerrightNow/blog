@@ -1,9 +1,9 @@
 ---
-title: github连接问题解决
-description: easy-keepalive-github：GitHub 直连保活工具
+title: GitHub 连接问题解决：easy-keepalive-github 直连保活工具
+category: Github
+description: easy-keepalive-github -- GitHub 直连保活工具介绍，用于缓解国内访问 GitHub 时的连接不稳定问题。
 published: 2026-10-11
-tags:
-- github
+tags: [GitHub, 网络工具, 连接优化]
 ---
 
 **easy-keepalive-github文章来源：**

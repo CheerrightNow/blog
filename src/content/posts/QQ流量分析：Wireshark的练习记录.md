@@ -1,10 +1,9 @@
 ---
-title: QQ流量分析
-description: 作业2-基于wireshark的QQ流量分析
+title: QQ流量分析：Wireshark的练习记录
+category: 作业
+description: 基于 Wireshark 对 QQ 流量进行抓包与分析，完成流量特征识别。
 published: 2026-10-19
-tags:
-- 作业
-  - QQ流量分析
+tags: [作业, QQ流量分析, Wireshark]
 ---
 
 ![image-20261020213519311](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/20/97388a2a70fedcfe99dceae1a8b09e32-image-20261020213519311.png)

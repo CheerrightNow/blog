@@ -1,14 +1,34 @@
 ---
-title: blog网站搭建记录
+title: blog迁移声明：从 Hexo 到 Astro + Fuwari
+category: 公告
 description: 个人blog网站迁移过程（hexo -> Astro+Fuwari）
 published: 2026-10-10
-tags:
-- blog网站搭建
+tags: [公告, 博客, Astro, Fuwari]
 ---
 
-**github + Astro + Fuwari**
+**Blog站点迁移说明**
+
+本站已完成底层框架迁移，由原来的 **Hexo** 切换为 **Astro + Fuwari 主题**。迁移的目的是获得更现代的页面视觉、更流畅的交互体验，以及更轻量的前端性能。
 
 
+
+**对读者的影响**
+
+- 原有文章已尽量完整迁移，正文内容保持不变。
+- 文章 frontmatter 字段做了适配调整，部分文章的发布日期、标签或分类可能有细微变化。
+- 图片仍使用原有图床外链，显示不受影响。
+- 站点视觉、导航和搜索交互已更新，阅读体验以新版为准。
+
+
+
+**后续计划**
+
+- 继续补充和整理历史文章
+- 优化移动端阅读体验
+
+
+
+**以下为blog迁移过程简述**
 
 **01 安装pnpm**
 

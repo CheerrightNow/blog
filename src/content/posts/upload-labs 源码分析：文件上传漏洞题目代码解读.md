@@ -1,12 +1,9 @@
 ---
-title: upload-labs源码分析
-description: 查看并理解题目源码
+title: upload-labs 源码分析：文件上传漏洞题目代码解读
+category: Web-靶场实战
+description: 通过查看并理解 upload-labs 各题目的源码，分析文件上传漏洞的成因与绕过思路，加深对漏洞原理的理解。
 published: 2026-10-02
-tags:
-- Web
-  - 文件上传漏洞
-    - 靶场实战
-      -源码分析
+tags: [Web, 文件上传漏洞, 靶场实战, 源码分析]
 ---
 
 **01**

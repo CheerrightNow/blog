@@ -1,13 +1,9 @@
 ---
-title: Ubuntu安装upload-labs靶场
-description: Ubuntu安装upload-labs靶场
+title: Ubuntu 环境搭建：upload-labs 文件上传靶场安装指南
+category: Web-靶场安装
+description: 在 Ubuntu 系统下安装部署 upload-labs 文件上传靶场，为文件上传漏洞的学习与实战练习提供环境支持。
 published: 2026-09-26
-tags:
-- Web  
-  - 文件上传漏洞
-- Linux
-  - 靶场安装
-    - upload-labs
+tags:  [Web, 文件上传漏洞, Linux, 靶场安装, upload-labs]
 ---
 
 **前言：**使用AI在虚拟机上安装靶场的时候，遭遇了许多麻烦事，建了改，改了删，删了建，还有什么镜像、容器、目录设置等一堆乱七八糟的事情，令人烦恼。在尝试了不知道多久后，也是终于在Ubuntu上搭建好了这个靶场。以下是本人整理的一些搭建过程，希望对以后的学习有所帮助。
@@ -129,6 +125,8 @@ docker start upload-labs
 ```
 
 
+
+**附：**
 
 --pikachu：
 
