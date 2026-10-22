@@ -19,7 +19,7 @@ tags: [Kali, Linux, 中文输入法, 系统配置]
 - `sudo apt update`
 - `sudo apt install fcitx5 fcitx5-chinese-addons fcitx5-pinyin fcitx5-rime fcitx5-frontend-gtk3 fcitx5-frontend-gtk4 fcitx5-frontend-qt5 fcitx5-configtool`
 
-注：`fcitx5-rime` *提供了强大的“中州韵”引擎（支持多种输入方案），*`fcitx5-pinyin` 是基础拼音引擎。建议都装上。
+注：`fcitx5-rime` 提供了强大的“中州韵”引擎（支持多种输入方案），`fcitx5-pinyin` 是基础拼音引擎。建议都装上。
 
 #### **2. 设置默认输入法框架**
 
@@ -47,7 +47,7 @@ Kali 默认通常使用 XFCE 桌面。
 2. 登录后，在应用菜单中找到 **Fcitx5 Configuration** (Fcitx5 配置)。
 3. 在右侧的 "Available Input Method" (可用输入法) 列表中，取消勾选 "Only Show Current Language" (仅显示当前语言)。
 4. 搜索 `Pinyin` 或 `Rime`。
-5. 选中它们，点击中间的箭头按钮添加到左侧的 "Input Method" (已选输入法) 列表中。
+5. 选中它们，双击箭头按钮添加到左侧的 "Input Method" (已选输入法) 列表中。
    - 建议顺序：Keyboard - English, Pinyin, Rime。
 6. 点击 "Apply" 或 "OK"。
 
