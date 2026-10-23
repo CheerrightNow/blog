@@ -77,7 +77,7 @@ Get-Content C:\ProgramData\GitHubKeepalive\logs\keepalive.log -Encoding UTF8
 
 **这里以Linux为例：**
 
-**01-1 下载**
+**02-1 下载**
 
 ```
 wget -c -O /opt/fastgithub_linux-x64.zip https://gitee.com/chcrazy/FastGithub/releases/download/2.1.4/fastgithub_linux-x64.zip && sudo unzip -d /opt /opt/fastgithub_linux-x64.zip && rm /opt/fastgithub_linux-x64.zip && sudo /opt/fastgithub_linux-x64/fastgithub start
@@ -89,7 +89,7 @@ wget -c -O /opt/fastgithub_linux-x64.zip https://gitee.com/chcrazy/FastGithub/re
 
 
 
-**01-2  代理配置**
+**02-2  代理配置**
 
 只在终端做代理：
 
@@ -108,8 +108,14 @@ git config --global https.proxy http://127.0.0.1:38457
 
 
 
-**02 遇到的问题**
+**02-3 遇到的问题**
 
-**02-1 Windows -/> kali**
+**1. Windows -/> kali**
 
 Windows上下载的`.tar.gz`压缩包经共享文件夹传到kali上时解压失败，可能与操作系统不同有关。
+
+**2.  git操作提示`SSL certificate problem`**
+
+需要关闭git的证书验证：
+
+`git config --global http.sslverify false`
