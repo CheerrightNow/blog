@@ -74,7 +74,7 @@ tags: [Web, upload-labs, 靶场实战]
 
 
 
-**Pass03**
+**Pass03----黑名单绕过**
 
 传入.php文件后发现考察黑名单绕过：
 
@@ -118,7 +118,7 @@ FcgidWrapper "D:/...../php/phpx.x.xnts/php-cgi.exe" .phtml
 
 ![image-20260924142155495](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/24/7bfbf00ff01341ab928d357fdc1c8bab-image-20260924142155495.png)
 
-**Pass04**
+**Pass04（.htaccess）**
 
 ![屏幕截图 2026-09-24 194539](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/24/11cf9c006f4451671d9ddacf06fc585d-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-09-24%20194539.png)
 
@@ -695,3 +695,53 @@ a1失败情况：
 蚁剑尝试连接，成功。
 
 ![image-20261023183705627](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/23/ecb6ecdb7b871ade05ed5d96a988f37b-image-20261023183705627.png)
+
+
+
+**Pass18**
+
+本关的上传路径出现了点问题，需要修改一下源码。
+
+将index.php里的第13行`(UPLOAD_PATH)`改为`(UPLOAD_PATH."/")`
+
+![image-20261026202132073](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/26/bfdb79a865f4b34e2ac34f283bd3efaa-image-20261026202132073.png)
+
+分析源码时可看到白名单：
+
+![image-20261026202257663](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/26/df1041daaac77bf176b9833565ba972f-image-20261026202257663.png)
+
+可以发现，白名单里面的文件几乎都是"非执行文件"，大多是静态资源、文档或压缩包。这里"执行文件"可以指能被服务器（或系统）直接执行代码 / 逻辑的文件（比如 `.php`（PHP 脚本）、`.asp`（ASP 脚本）、`.jspx`（Java Web 脚本）、`.exe`（Windows 可执行程序）等）。
+
+同时，没有文件包含窗口，说明考察的不是图片马。
+
+想到利用Apache多后缀解析漏洞：
+
+```
+当 Apache 配置中使用 AddHandler application/x-httpd-php .php 这类指令时，其匹配逻辑是“包含即匹配”。这意味着，只要文件名中任意位置存在一个完整的 .php 后缀段，该文件就会被交给 PHP 处理器执行，而不管它是不是最后一个后缀。
+
+举个例子，对于文件 shell.php.jpg：
+
+    Apache 从右向左识别后缀，看到 .jpg。
+
+    但由于 AddHandler 规则的存在，它在向左检查时发现了 .php 段，并据此将该文件视为 PHP 脚本处理。
+
+    最终，这个文件会被执行，而非作为图片返回。
+```
+
+httpd.conf这个文件指定了Apache可以执行的文件类型，如图中的".z"、",gz"、",tgz"、".php"等。
+
+![image-20261026203159728](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/26/fc36f8f3a4f9e0ed5f723c8f8192d196-image-20261026203159728.png)
+
+可以发现白名单里有很多Apache不认识的文件名。
+
+以`.7z`为例，将上一关`exploit.php`重命名为`exploit.php.7z`，
+
+其余步骤同Pass17。
+
+（似乎只有`.7z`可行，其他的要么mime.types中会有映射，要么浏览器能自己识别出文件类型来）
+
+![image-20261026204223860](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/26/eb05b8657f0a5431a4b983faf5edfec8-image-20261026204223860.png)
+
+成功。
+
+![image-20261026204332008](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/26/2594cf2490957dbe0e1b7d3b3cdfb5a3-image-20261026204332008.png)
