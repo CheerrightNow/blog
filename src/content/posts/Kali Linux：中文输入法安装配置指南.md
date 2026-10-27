@@ -1,7 +1,7 @@
 ---
-title: Kali Linux：中文输入法安装配置指南
+title: "Kali Linux：中文输入法安装配置指南"
 category: 系统配置
-description: 介绍在 Kali Linux 环境下安装与配置中文输入法的完整流程，涵盖输入法框架选择、安装步骤及常见问题处理。
+description: "介绍在 Kali Linux 环境下安装与配置中文输入法的完整流程，涵盖输入法框架选择、安装步骤及常见问题处理。"
 published: 2026-10-22
 tags: [Kali, Linux, 中文输入法, 系统配置]
 ---

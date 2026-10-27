@@ -1,7 +1,7 @@
 ---
-title: GitHub 连接问题解决：easy-keepalive-github / FastGithub
+title: "GitHub 连接问题解决：easy-keepalive-github / FastGithub"
 category: Github
-description: easy-keepalive-github -- GitHub 直连保活工具介绍，用于缓解国内访问 GitHub 时的连接不稳定问题; FastGithub: github加速神器，解决github打不开、git-clone、git-pull、git-push失败等问题。
+description: "easy-keepalive-github -- GitHub 直连保活工具介绍，用于缓解国内访问 GitHub 时的连接不稳定问题; FastGithub: github加速神器，解决github打不开、git-clone、git-pull、git-push失败等问题。"
 published: 2026-10-11
 tags: [GitHub, 网络工具, 连接优化]
 ---

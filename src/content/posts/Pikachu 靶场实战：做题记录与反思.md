@@ -1,7 +1,7 @@
 ---
-title: Pikachu 靶场实战：做题记录与反思
+title: "Pikachu 靶场实战：做题记录与反思"
 category: Web-靶场实战
-description:  记录在 Pikachu 靶场中的实战做题过程，通过 Kali 访问（kali-ip:8090）进行 Web 漏洞练习。
+description:  "记录在 Pikachu 靶场中的实战做题过程，通过 Kali 访问（kali-ip:8090）进行 Web 漏洞练习。"
 published: 2026-10-16
 tags: [Web, Pikachu, 靶场实战]
 ---

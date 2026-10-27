@@ -1,7 +1,7 @@
 ---
-title: 信息搜集：神奇的搜索引擎ZoomEye
+title: "信息搜集：神奇的搜索引擎ZoomEye"
 category: 作业
-description: 本次作业围绕网络空间搜索引擎的对比分析，结合ZoomEye进行信息检索，并系统梳理了子域名收集的常见工具与实战流程。
+description: "本次作业围绕网络空间搜索引擎的对比分析，结合ZoomEye进行信息检索，并系统梳理了子域名收集的常见工具与实战流程。"
 published: 2026-10-22
 tags: [ZoomEye, 渗透测试, 信息收集, 安全工具]
 ---

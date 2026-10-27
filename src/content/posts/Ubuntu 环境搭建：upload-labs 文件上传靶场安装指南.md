@@ -1,7 +1,7 @@
 ---
-title: Ubuntu 环境搭建：upload-labs 文件上传靶场安装指南
+title: "Ubuntu 环境搭建：upload-labs 文件上传靶场安装指南"
 category: Web-靶场安装
-description: 在 Ubuntu 系统下安装部署 upload-labs 文件上传靶场，为文件上传漏洞的学习与实战练习提供环境支持。
+description: "在 Ubuntu 系统下安装部署 upload-labs 文件上传靶场，为文件上传漏洞的学习与实战练习提供环境支持。"
 published: 2026-09-26
 tags:  [Web, 文件上传漏洞, Linux, 靶场安装, upload-labs]
 ---

@@ -1,7 +1,7 @@
 ---
-title: 跨环境抓包配置：Windows 端 BurpSuite 监听 Kali 虚拟机 Firefox 流量
+title: "跨环境抓包配置：Windows 端 BurpSuite 监听 Kali 虚拟机 Firefox 流量"
 category: 工具配置
-description: 配置 Windows 物理机上的 BurpSuite 监听 Kali 虚拟机中 Firefox 浏览器的 HTTP/HTTPS 流量，实现物理机与虚拟机之间的跨环境抓包。
+description: "配置 Windows 物理机上的 BurpSuite 监听 Kali 虚拟机中 Firefox 浏览器的 HTTP/HTTPS 流量，实现物理机与虚拟机之间的跨环境抓包。"
 published: 2026-10-01
 tags: [BurpSuite, Kali, Firefox, 抓包配置]
 ---

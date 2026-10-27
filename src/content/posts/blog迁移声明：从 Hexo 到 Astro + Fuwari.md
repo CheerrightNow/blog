@@ -1,7 +1,7 @@
 ---
-title: blog迁移声明：从 Hexo 到 Astro + Fuwari
+title: "blog迁移声明：从 Hexo 到 Astro + Fuwari"
 category: 公告
-description: 个人blog网站迁移过程（hexo -> Astro+Fuwari）
+description: "个人blog网站迁移过程（hexo -> Astro+Fuwari）"
 published: 2026-10-10
 tags: [公告, 博客, Astro, Fuwari]
 ---
