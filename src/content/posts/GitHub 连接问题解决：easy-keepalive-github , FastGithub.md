@@ -119,3 +119,15 @@ Windows上下载的`.tar.gz`压缩包经共享文件夹传到kali上时解压失
 需要关闭git的证书验证：
 
 `git config --global http.sslverify false`
+
+**3. 其它命令(比如curl)无法执行**
+
+终端里残留了指向 `127.0.0.1` 的代理变量。
+
+临时解决：
+
+```
+env | grep -i proxy          # 先看有没有残留变量
+unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY all_proxy ALL_PROXY          #从当前终端环境里删除所有与代理相关的环境变量
+```
+
