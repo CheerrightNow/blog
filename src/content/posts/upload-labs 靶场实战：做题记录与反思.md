@@ -8,10 +8,22 @@ tags: [Web, upload-labs, 靶场实战]
 
 **upload-labs靶场通关**
 
-### <font size="5">**前言：如何确认自己真的通关了？**</font>
+### <font size="5">**前言01：如何确认自己真的通关了？**</font>
 
 1. 访问执行：复制上传后的文件路径，在浏览器访问。如果看到 phpinfo 页面或者代码没有直接以文本形式泄露，说明解析成功。
 2. 工具连接：对于一句话木马，用蚁剑或菜刀尝试连接。如果显示“连接成功”并能执行命令，才算真正拿到了服务器的控制权。
+
+
+
+**前言02：靶场更换说明**
+
+本人一开始用的是旧靶场(21关版)，打到pass14发现旧靶场存在缺陷（详见pass14），所以更换了新靶场（20关版）继续做题。
+
+**在此声明：**Pass01~Pass13为旧靶场（21关版）解题过程；Pass14~Pass20为新靶场（20关版）解题过程。新靶场（20关版）下载链接：
+
+```
+https://github.com/c0ny1/upload-labs/releases
+```
 
 。。。。。。。。。。。。。。。。。。。。。。。。
 
@@ -118,7 +130,7 @@ FcgidWrapper "D:/...../php/phpx.x.xnts/php-cgi.exe" .phtml
 
 ![image-20260924142155495](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/24/7bfbf00ff01341ab928d357fdc1c8bab-image-20260924142155495.png)
 
-**Pass04（.htaccess）**
+**Pass04----.htaccess**
 
 ![屏幕截图 2026-09-24 194539](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/09/24/11cf9c006f4451671d9ddacf06fc585d-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202026-09-24%20194539.png)
 
@@ -181,7 +193,7 @@ emm，貌似没什么用，看看源码，用.htaccess覆盖试试：
 
 
 
-**Pass05**
+**Pass05----黑名单绕过/.user.ini**
 
 .htaccess文件不让上传了，fuzz测试没有明显切入点。
 
@@ -202,6 +214,8 @@ emm，貌似没什么用，看看源码，用.htaccess覆盖试试：
 
 
 还有一种方法：.user.ini文件上传：
+
+（前提：上传文件夹里至少有一个`.php`文件）
 
 ```
 一、什么是 .user.ini
@@ -264,7 +278,7 @@ auto_prepend_file=test.txt
 
 
 
-**Pass06**
+**Pass06----黑名单绕过**
 
 fuzz一下，没发现有用的东西。
 
@@ -745,3 +759,72 @@ httpd.conf这个文件指定了Apache可以执行的文件类型，如图中的"
 成功。
 
 ![image-20261026204332008](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/26/2594cf2490957dbe0e1b7d3b3cdfb5a3-image-20261026204332008.png)
+
+
+
+**Pass19**
+
+![image-20261027164956222](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/5dcce4b111b47dde94f75598577dec99-image-20261027164956222.png)
+
+看初始界面，发现文件名称疑似可以自己写。
+
+最初以为是白名单检查，看了源码才发现是黑名单绕过。
+
+![image-20261027165156854](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/4932767b61059f8618ed82fb13af5881-image-20261027165156854.png)
+
+感觉和上面的黑名单绕过的题目有点像，想过传`.user.ini`，但是`./upload`里没有`.php`文件，传`.user.ini`没什么用。
+
+用点号绕过`xxx.php.`的方法保存名称，发现上传成功：
+
+![image-20261027165743144](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/a4909548c833bdc4c52513193ada38f0-image-20261027165743144.png)
+
+。。。。。。。。。。。。。。。。。。。。。。。。。。
+
+![image-20261027165712967](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/b7a2f6d56784e949b4d591612392e32a-image-20261027165712967.png)
+
+蚁剑成功连接：
+
+![image-20261027165836199](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/5b1c35bb83527c977f3b7b0ab9a82286-image-20261027165836199.png)
+
+由此想到**空格绕过**`xxx.php `；**路径拼接绕过**`666.php/.`；**$DATA绕过**`123.php::$DATA`的方法，经测试同样可行。
+
+
+
+**Pass20**
+
+![image-20261027173328327](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/efb4a4ce54d8d97faa0da7ac7ea82de3-image-20261027173328327.png)
+
+![image-20261027173410373](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/cc777ef767488c2b195ffe3f4a5b4c4f-image-20261027173410373.png)
+
+**漏洞原理**
+
+代码先判断 `$file` 是否为数组。如果不是，才按 `.` 拆分成数组。这意味着如果直接传入一个数组，它不会被拆分，后续逻辑会直接处理这个数组。
+
+**关键矛盾**：
+
+- **校验时**：`$ext = end($file)`，取数组**最后一个元素**，要求它在 `jpg/png/gif` 白名单里。
+- **拼接时**：`$file_name = reset($file) . '.' . $file[count($file) - 1]`，取的是**第一个元素**，加上数组**元素个数减一**作为下标对应的值。
+
+利用 `count()` 函数的一个特性：对于不连续的数组（比如索引 0 和 2，没有 1），`count()` 只统计实际存在的元素个数（为 2）。此时 `count($file) - 1` 等于 1，但 `$file[1]` 并不存在，值为空。最终拼接出的文件名就是 `reset($file) . '.'`，末尾带一个点。在 Windows 环境下，末尾的点会被自动去除，文件最终落盘为 `shell.php`。
+
+**原始数据包：**
+
+![image-20261027173702633](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/c7da255b5ab95748db7f5e64d13b62f8-image-20261027173702633.png)
+
+**修改后数据包：**
+
+![image-20261027173813153](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/dd81118323b75f524eb70d66699fcee4-image-20261027173813153.png)
+
+成功上传。
+
+![image-20261027173848331](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/750d00fcdf36fa2fdaca388ab4c292c4-image-20261027173848331.png)
+
+蚁剑连接成功。
+
+![image-20261027173920799](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/10/27/b9c0c242186f48224d1bde5374bcf682-image-20261027173920799.png)
+
+
+
+
+
+**至此，upload-labs靶场通关！！！**
