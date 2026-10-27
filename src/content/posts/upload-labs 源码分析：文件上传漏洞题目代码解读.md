@@ -409,6 +409,62 @@ class MyUpload {
 
 
 
+**11 新版Pass20--源码分析**
+
+**11-1**
+
+```
+$file_ext = pathinfo($file_name,PATHINFO_EXTENSION);
+```
+
+`pathinfo()` 用来**解析文件路径/文件名**,返回它的各个组成部分(目录、文件名、扩展名等)。
+
+| 常量                     | 返回什么           | 例`"photo.jpg"` |
+| ------------------------ | ------------------ | --------------- |
+| `PATHINFO_DIRNAME`       | 目录部分           | `.`(或空)       |
+| `PATHINFO_BASENAME`      | 完整文件名(带后缀) | `photo.jpg`     |
+| `PATHINFO_FILENAME`      | 文件名(不带后缀)   | `photo`         |
+| **`PATHINFO_EXTENSION`** | **扩展名**         | **`jpg`**       |
+
+**11-2**
+
+```
+$file = empty($_POST['save_name']) ? $_FILES['upload_file']['name'] : $_POST['save_name'];
+```
+
+**empty($_POST['save_name'])：**判断 POST 提交的 `save_name` 字段是否为空。
+
+**11-3**
+
+```
+ $file = explode('.', strtolower($file));
+```
+
+`explode(分隔符, 字符串)` 把字符串按指定分隔符切成数组。
+
+**11-4**
+
+```
+$file_name = reset($file) . '.' . $file[count($file) - 1];
+```
+
+`reset()` 是 PHP 内置函数,把数组内部指针移到第一个元素,并返回它的值。
+
+`.` —— 字符串连接符，把前后拼起来。
+
+**11-5**
+
+```
+$ext = end($file);
+```
+
+`end()` 是 PHP 内置函数,它:
+
+1. 把数组的内部指针移到最后一个元素
+2. 返回该元素的值
+
+
+
 **二、漏洞成因代码分析与防护建议（源码请自行到靶场查看）**
 
 **Pass18---Apache解析漏洞+条件竞争**
