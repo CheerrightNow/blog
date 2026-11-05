@@ -159,15 +159,15 @@ XSStrike 是一款用 Python 编写的开源跨站脚本（XSS）检测套件，
 常用命令示例：
 
 扫描单个 URL：
-python xsstrike.py -u "http://target.com/search?q=test"
+xsstrike -u "http://target.com/search?q=test"
 
 测试 POST 数据：
-python xsstrike.py -u "http://target.com/feedback" --data "comment=test"
+xsstrike -u "http://target.com/feedback" --data "comment=test"
 
 爬取全站并测试：
-python xsstrike.py -u "http://target.com" --crawl -l 3
+xsstrike -u "http://target.com" --crawl -l 3
 
 盲打 XSS 模式：
-python xsstrike.py -u "http://target.com" --crawl --blind
+xsstrike -u "http://target.com" --crawl --blind
 ```
 
