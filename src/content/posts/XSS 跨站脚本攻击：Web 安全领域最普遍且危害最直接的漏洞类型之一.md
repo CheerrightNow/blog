@@ -171,3 +171,11 @@ xsstrike -u "http://target.com" --crawl -l 3
 xsstrike -u "http://target.com" --crawl --blind
 ```
 
+![image-20261105153823266](https://cdn.jsdelivr.net/gh/CheerrightNow/my-blog-images@img/img/img/2026/11/05/3306dc8c55840c1a7b6655e956ec3e9e-image-20261105153823266.png)
+
+```
+Reflections found: 1：这是最关键的一步！ 工具发现你输入的 test 被原封不动地“反射（显示）”在了网页的返回结果里。只要有反射，就有极大的 XSS 风险。
+
+Generating payloads / Payloads generated: 3072：工具根据反射的上下文环境，瞬间生成了 3072 种测试代码（Payload）。
+```
+
